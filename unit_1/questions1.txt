@@ -1,0 +1,202 @@
+Q: What is an operand?
+
+A:
+is one or more input for an operation
+============
+
+Q: The symbol/name which specifies an operation is called what?
+
+A:
+operator
+============
+
+Q: Do all operations return values?
+
+A:
+yes
+============
+
+Q: What value does this operation return?
+
+	(add 3 5)
+
+A:
+8
+============
+
+Q: What is the value of x after these lines of code execute?
+
+	as x 3
+	as x 4
+	as y (add x 5)
+
+A:
+4
+============
+
+Q: What type of value is this?
+
+	true
+
+A:
+Boolean
+============
+
+Q: What is the value returned by this expression?
+
+	(and (not false) true)
+
+A:
+true
+============
+
+Q: What is the value returned by this expression?
+
+	(or false true)
+
+A:
+true
+============
+
+Q: What is the value returned by this expression?
+
+	(or false (not true))
+
+A:
+false
+============
+
+Q: Is the following a legal identifier (i.e. a legal variable name)?
+
+	235hello
+
+A:
+no, identifiers must not start with digits
+============
+
+Q: Is the following a legal identifier (i.e. a legal variable name)?
+
+	if
+
+A:
+no, "if" is a reserved word
+============
+
+Q: Write an expression that returns true if variable x holds a number between 20 and 30 (non-inclusive: return false if x is equal to 20 or 30).
+
+A:
+	if (or (gt x 20) (lt x 30))
+		(return true)
+	else if (or (eq x 20 (eq x 30)))
+		(return false)
+============
+
+Q: In the code below, what is the value of val after the last line?
+
+	as n 2
+	as exponent 4
+	as val n
+	while (gt exponent 1)
+		as val (mul val n)
+		as exponent (sub exponent 1)
+
+
+A:
+16
+============
+
+Q: A prime number is an integer which is not evenly divisible by any integer less than itself (other than 1),
+e.g. 7 is prime but 9 is not (because 9 is evenly divisible by 3).
+
+In the code below, what is the value of isPrime after the last line?
+
+	as n 11
+	as isPrime true
+	as i 2
+	while (lt i n)
+		if (eq (mod n i) 0)
+			as isPrime false
+		as i (add i 1)
+
+A:
+true, we will never enter the if clause
+============
+
+Q: Write a loop that prints the numbers 0 up to (but not including) 7.
+
+
+A:
+	as i 0
+	while(lt i 7)
+		(print i)
+		as i (add i 1)
+============
+
+Q: Write a loop that prints the numbers 0 up to (but not including) 7 in reverse order.
+
+A:
+	as i 6
+	while(gte i 0)
+		(print i)
+		as i (sub i 1)
+
+============
+
+Q: How many characters does this string have?
+
+"\tHi th\nere"
+
+A:
+10
+============
+
+Q: Write a loop that prints the numbers 0 up to (and including) 50 but skips the number 23.
+
+A:
+	as i 0
+	while(lte i 50)
+		if(not (eq i 23))
+			(print i)
+		as i (add i 1)
+============
+
+Q: Write a loop that prints the numbers 0 up to (and including) 50 but prints "fizz" instead of any number evenly divisible by 3.
+
+A:
+	as i 0
+	while(lte i 50)
+		if(eq (mod i 3) 0)
+			(print "fizz")
+		as i (add i 1)
+
+============
+
+Q: Write a loop that prints the numbers 0 up to (and including) 100 but prints "fizz" instead of any number evenly divisible by 3 and "buzz" instead of any number evenly divisible by 5. If a number is evenly divisble by both 3 and 5, print "fizz".
+
+A:
+	as i 0
+	while(lte i 50)
+		if(and (eq (mod i 3) 0) (eq (mod i 5) 0))
+			(print "fizz")
+		if(eq (mod i 3) 0)
+			(print "fizz")
+		if(eq (mod i 5) 0)
+			(print "buzz")
+
+		as i (add i 1)
+============
+
+Q: Write a loop that prints the numbers 0 up to (and including) 100 but prints "fizz" instead of any number evenly divisible by 3, "buzz" instead of any number evenly divisible by 5, and "fizzbuzz" instead of any number evenly divisible by both 3 AND 5.
+
+A:
+	as i 0
+	while(lte i 50)
+		if(and (eq (mod i 3) 0) (eq (mod i 5) 0))
+			(print "fizzBuzz")
+		if(eq (mod i 3) 0)
+			(print "fizz")
+		if(eq (mod i 5) 0)
+			(print "buzz")
+
+		as i (add i 1)
+============
