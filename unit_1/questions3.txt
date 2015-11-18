@@ -1,0 +1,151 @@
+Q: Write a function foo that takes no arguments and returns the number 3:
+
+A:
+	function foo
+    		return 3;
+============
+
+Q: Write a function foo with one parameter x that returns x multiplied by 5.
+
+A:
+	function foo x
+    		return x * 5;
+============
+
+Q: Write a function foo with two parameters, x and y, that returns y subtracted from x
+
+A:
+	function  foo x y
+    		return x - y;
+============
+
+Q: If two functions have variables with the same name, what is the relationship between those variables? (trick question)
+
+A:
+none
+============
+
+Q: If we create a variable outside a function, what kind of variable is it and how is it special?
+
+A:
+it global and it is special in the way its accessed, is defined in the global scope so every othe functions
+can make use of it
+
+============
+
+Q: Are function parameters variables?
+
+A:
+in a way they are...
+============
+
+Q: What will this program do?
+
+	function foo
+		(print "hi")
+
+	function bar x
+		(x)
+
+	(bar foo)
+
+A:
+print "hi"
+
+============
+
+Q: Write a loop that prints every element of a list foo. (You will need the len and get operators.)
+
+A:
+	#define list....
+	as i 0
+	while (lt i (len my_list))
+		as i (add i 1)
+		(print (get my_list i))
+============
+
+Q: Write a function 'copyList' that takes a list as argument and returns a new list with all the elements of the original.
+(You will need the len, list, get, and append operators.)
+
+A:
+	function copyList list
+		as new_list (list)
+		as i 0
+		while (lt i (len my_list))
+			as i (add i 1)
+			(append new_list (get list i))
+		return new_list
+
+============
+
+Q: Write a function 'reverseList' that takes a list as argument and returns a new list with all the elements of the original in reverse order.
+(You will need the len, list, get, and append operators.)
+
+A:
+	function copyList list
+		as new_list (list)
+		as i (sub (len my_List) 1)
+		while (gte i 0)
+			as i (sub i 1)
+			(append new_list (get list i))
+		return new_list
+
+============
+
+Q: Write a function 'noThrees' that takes a list as argument and returns a new list with all the elements of the original except with all elements equal to 3 taken removed. (Remember that neq is an operator returning true when its operands are not equal.)
+
+A:
+	function noThrees list
+		as new_list (list)
+		as i 0
+		while (lt i (len my_list))
+			if (neq (get list i) 3)
+				(append new_list (get list i))
+			as i (add i 1)
+		return new_list
+============
+
+Q: Write a loop that prints all of the keys and values of a dictionary 'foo'. (You will need a previously unmentioned operator 'allKeys', which rturns a list containing all the keys of a dictionary, e.g. (allKeys foo) returns a list of the keys in dictionary foo)
+
+A:
+
+	# Declare foo...
+	as i 0
+	as keys (allKeys list)
+	while (lt i len(keys))
+		as key (get keys i)
+		(print key "=>" (get foo key)
+		as i (add i 1)
+
+============
+
+Q: Write a function 'noFours' that takes a dictionary as argument and returns a new dictionary with all the key-value pairs of the original except for those where the value equals 4. (You will need 'set' to add elements to the new dictionary.)
+
+A:
+	function noFours dict
+		as new_dict (dict)
+		as dict_keys (allKeys dict)
+		as i 0
+		while (lt i (len dict_keys))
+			as key (get dict_keys i)
+			as val (get dict key)
+			if (neq val 4)
+				(set new_dict key val)
+			as i (add i 1)
+		return new_dict
+
+==========
+
+Q: Write a function 'isPrime' that takes one number argument and returns true if that number is a prime number (meaning that the only integer smaller than itself by which it is evenly divisible is 1, e.g. 13 is a prime number but 12 is not).
+
+(HINT: loop over the numbers 2 up to one less than the number you are testing. Also, think of the return value being true by default: only if you find a number by which the tested number is evenly divisible do you return false.)
+
+A:
+	function isPrime x
+		as is_prime true
+		as i 2
+		while(lt i x)
+			if (eq (mod x i) 0)
+				as is_prime false
+		return us_prime
+
