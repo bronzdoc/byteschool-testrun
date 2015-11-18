@@ -1,0 +1,416 @@
+Q: Write a function 'foo' that takes two parameters and returns their sum.
+
+A:
+var foo = function(x, y) {
+	return x + y;
+}
+=================
+
+Q: What does Javascript call its equivalents of Pigeon's lists and dictionaries?
+
+A:
+arrays and objects
+=================
+
+Q: What value does this operation return?
+
+	3 + 'hi'
+
+A:
+"3hi"
+=================
+
+Q: What is the value of x?
+
+	x = 'foo' + '';
+
+A:
+"foo"
+
+=================
+
+Q: What is the value of x in the bottom line?
+
+	x = 3
+	x = 4
+	y = x + 5
+
+A:
+4
+=================
+
+Q: What type of value is this?
+
+	true
+
+A:
+Boolean
+=================
+
+Q: What is the value returned by this expression?
+
+	!3 && true
+
+A:
+false
+=================
+
+Q: What is the value returned by this expression?
+
+	4 === 4 === 4
+
+A:
+false
+=================
+
+Q: What is the value returned by this expression?
+
+	5 > 6 || !''
+
+A:
+true
+=================
+
+Q: Is the following a legal identifier (i.e. a legal variable name)?
+
+	235hello
+
+A:
+no
+=================
+
+Q: Is the following a legal identifier (i.e. a legal variable name)?
+
+	hello234
+
+A:
+yes
+=================
+
+Q: Is the following a legal identifier (i.e. a legal variable name)?
+
+	hel235lo
+
+A:
+yes
+=================
+
+Q: Is the following a legal identifier (i.e. a legal variable name)?
+
+	_235hello
+
+A:
+yes
+=================
+
+Q: Is the following a legal identifier (i.e. a legal variable name)?
+
+	_hello
+
+A:
+yes
+=================
+
+Q: Is the following a legal identifier (i.e. a legal variable name)?
+
+	h^234
+
+A:
+no
+=================
+
+Q:
+Is the following a legal identifier (i.e. a legal variable name)?
+
+	while
+
+A:
+no
+=================
+
+Q: Is the following a legal identifier (i.e. a legal variable name)?
+
+	h$234
+
+A:
+no
+=================
+
+Q: Is the following a legal identifier (i.e. a legal variable name)?
+
+	h_234
+
+A:
+yes
+=================
+
+Q: How many lines of text are in this string?
+
+	'Hello\n there, what\\n is the\n time, please?'
+
+A:
+3
+=================
+
+Q: Put a pair of parentheses around every operation which isn't already in parentheses:
+
+	3 + (5 * 7)
+
+A:
+
+(3 + (5 * 7))
+=================
+
+Q: Put a pair of parentheses around every operation which isn't already in parentheses:
+
+	(3 + 5) * 7
+
+A:
+
+(3 + (5 * 7)
+=================
+
+Q: Put a pair of parentheses around every operation which isn't already in parentheses:
+
+	x > 3 || x < 0
+
+A:
+
+(x > 3) || (x < 0)
+=================
+
+Q: Put a pair of parentheses around every operation which isn't already in parentheses:
+
+	foo = 'hello, ' + 'there'
+
+A:
+
+foo = ('hello, ' + 'there'
+=================
+
+Q: Put a pair of parentheses around every operation which isn't already in parentheses:
+
+	bar = 3 + (foo = 9)
+
+A:
+bar = (3 + (foo = 9))
+
+=================
+
+Q: Put a pair of parentheses around every operation which isn't already in parentheses:
+
+	-x * 2
+
+A:
+
+(-x * 2)
+=================
+
+
+Q: Is this an expression or a statement?
+
+	97
+
+A:
+statement
+=================
+
+Q: Is this an expression or a statement?
+
+	'hello'
+
+A:
+statement
+=================
+
+Q: Is this an expression or a statement?
+
+	x === y
+
+A:
+expression
+=================
+
+Q: Is this an expression or a statement?
+
+	!foo
+
+A:
+expression
+=================
+
+Q: Is this an expression or a statement?
+
+	x && y
+
+A:
+expression
+=================
+
+Q: Is this an expression or a statement?
+
+	if (x < 3) {
+	    y = 7;
+	}
+
+A:
+statement
+=================
+
+Q: Is this an expression or a statement?
+
+	while (x < 3) {
+	 	y = 7;
+	}
+
+A:
+statement
+=================
+
+Q: Is this expression a valid target of assignment? In other words, can it legally be the left operand of = ?
+
+	3 + foo
+
+A:
+yes
+
+=================
+
+
+Q: Write a function 'isPrime' that returns true if its argument is a prime number.
+
+A:
+ var isPrime = function(x) {
+	 for(var i = 2; i < x; i++) {
+		 if(x % i == 0)
+			 return false;
+	 }
+	 return true;
+ }
+
+=================
+
+Q: Write a function 'power' that raises parameter 'n' to the power of parameter 'exp'.
+(HINT: use a loop to multiply n by itself one less than exp times)
+
+A:
+
+var power = function(n, exp) {
+    if (exp === 0)
+        return 1;
+
+    return n * power(n, exp-1);
+}
+
+=================
+
+Q: Which variables are global? Which are local to function foo? Which are local to function bar?
+
+	var x = 3;
+
+	function foo(a, b) {
+		var z = a * 2;
+		x = z + b;
+	}
+
+
+	function bar(j, k, l) {
+		y = j + 1;
+		return j * k * l;
+	}
+
+A:
+global : x
+foo:  a, b, z
+bar: j, k, l, y
+
+=================
+
+Q: How many variables are in this code?
+
+	function foo(a, b, c) {
+		return a * b * c;
+	}
+
+	function bar(c, d) {
+		return c * d;
+	}
+
+A:
+5
+
+=================
+
+Q: How does the local variable x of the first call affect the second call? (trick question)
+
+	function foo(x) {
+		return x + 3;
+	}
+
+	foo(6)    // returns 9
+	foo(5)    // returns 8
+
+A:
+it doesn't affect it at all...
+
+=================
+
+Q: How many arguments does this function call have?
+
+	foo(x, 'hi', 7 + 2)
+
+A:
+3
+
+=================
+
+Q: How many parameters does this function have?
+
+	function foo(a, b, c) {
+		// ...
+	}
+
+A:
+3
+=================
+
+Q: Is this an expression or a statement?
+
+	var x = 3;
+
+A:
+statement
+
+=================
+
+Q: Is this an expression or a statement?
+
+	foo()
+
+A:
+expression
+=================
+
+
+Q: Is this an expression or a statement?
+
+	function foo() {
+	 	doStuff();
+	 	return 4;
+	}
+
+A:
+expresion
+=================
+
+
+Q: Is this an expression or a statement?
+
+	function () {
+		doStuff();
+	 	return 4;
+	}
+
+A:
+expresion
+=================
