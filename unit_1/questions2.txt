@@ -27,7 +27,7 @@ Q: What is the decimal equivalent of this octal number?
 	0142
 
 A:
-(1 * 8^2) + (4 * 8^1) + (2 * 8^0) = 68
+(1 * 8^2) + (4 * 8^1) + (2 * 8^0) = 98
 ============
 
 Q: What is the decimal equivalent of this hex number?
@@ -51,7 +51,7 @@ Q: What is the hex equivalent of this decimal number?
 	64
 
 A:
-(4 * 16^1) + (4 * 16^0)
+(4 * 16^1) + (4 * 16^0) // brian answer 0x40
 ============
 
 Q: What is the hex equivalent of this decimal number?
@@ -59,13 +59,15 @@ Q: What is the hex equivalent of this decimal number?
 	70
 
 A:
+// brian answer 0x46
 
 ============
 
 Q: What are the first 10 powers of 2?
 
 A:
- 0 1 2 3 4 5 6 7 8 9
+
+ 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024
 ============
 
 Q: What is the decimal equivalent of this binary number?

@@ -85,10 +85,7 @@ no, "if" is a reserved word
 Q: Write an expression that returns true if variable x holds a number between 20 and 30 (non-inclusive: return false if x is equal to 20 or 30).
 
 A:
-	if (or (gt x 20) (lt x 30))
-		(return true)
-	else if (or (eq x 20 (eq x 30)))
-		(return false)
+	(and (gt x 20) (lt x 30))
 ============
 
 Q: In the code below, what is the value of val after the last line?

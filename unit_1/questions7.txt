@@ -1,0 +1,231 @@
+===========
+
+Q: What is the value of 'a' after this code?
+
+	var x = {hi: 5, bye: 7};
+
+	function foo() {
+		return 'hi';
+	}
+
+	var a = x[foo()];
+
+A:
+5
+
+===========
+
+Q: What is the value of 'c' after this code?
+
+	function bar() {
+		return {hi: -2, '5': false};
+	}
+
+	var c = bar().hi;
+
+A:
+-2
+===========
+
+Q: What is the value of 'd' after this code?
+
+	function bar() {
+		return {hi: -2, '5': false};
+	}
+
+	var d = bar()[1 + 4];
+
+A:
+false
+===========
+
+Q: Write a loop that uses console.log() to print each value of this array x.
+(We'll discuss 'console.log' later, but in short it prints its arguments to the browser console.)
+
+	var x = [7, 2, 'hi'];
+
+A:
+	for (var i = 0; i < x.length ++) {
+		console.log(x[i]);
+	}
+===========
+
+Q: Write a loop that uses console.log() to print each value of this array x in reverse order.
+
+	var x = [7, 2, 'hi'];
+
+
+A:
+	for (var i = (x.length-1); i >= 0; i--) {
+		console.log(x[i]);
+	}
+===========
+
+Q: What are the operands in this operation?
+
+	foo[3]
+
+A:
+foo, 3
+===========
+
+Q: Is this expression a valid target of assignment? In other words, can it legally be the left operand of = ?
+
+	bar[x]
+
+A:
+yes, if x is defined
+
+===========
+
+Q: Is this expression a valid target of assignment? In other words, can it legally be the left operand of = ?
+
+	{hi: 3}
+
+A:
+no
+===========
+
+Q: What is the value of 'b'?
+
+	var b = {hi: 18, bye: 9}['bye'];
+
+A:
+9
+
+===========
+
+Q: Is this an expression or a statement?
+
+	x[0] = 3;
+
+A:
+statement
+
+===========
+
+Q: Is this expression a valid target of assignment? In other words, can it legally be the left operand of = ?
+
+	bar[2]
+
+A:
+yes
+
+===========
+
+Q: Is this expression a valid target of assignment? In other words, can it legally be the left operand of = ?
+
+	[3, 5]foo
+
+A:
+no
+===========
+
+Q: Write the equivalent expressions using subscript [] instead of the dot operator .
+
+	x = foo.bar
+
+	a.b = 9
+
+A:
+a["b"] = 9
+===========
+
+Q: Put a pair of parentheses around every operation which isn't already in parentheses:
+
+	3 / a.b
+
+A:
+
+	(3 / (a.b))
+===========
+
+Q: Put a pair of parentheses around every operation which isn't already in parentheses:
+
+	a[0] === a[1]
+
+A:
+	((a[0]) === (a[1]))
+
+===========
+
+Q: Given an array x, append the value 7 to the array (i.e. expand the array size by one with the value 7).
+(HINT: Use x.length)
+
+A:
+x.push(7)
+===========
+
+Q: Write a function 'foo' that creates and returns a function that calls console.log("hello").
+
+A:
+	var foo = function(x) {
+		return function() {
+			console.log("hello");
+		}
+	}
+
+===========
+
+Q: Write a function 'foo' that takes a parameter x and creates and returns a function that calls console.log(x).
+Having defined this function, what would foo(3)() do?
+
+A:
+	var foo = function(x) {
+		return function() {
+			console.log(x);
+		}
+	}
+===========
+
+Q: Write a function 'circleArea' that returns the area of a circle given radius as parameter 'r'.
+(Area equals the product of pi and r squared. Use 3.1415 to approximate pi.)
+	var circleArea = function(r) {
+		var pi = 3.1415;
+		return p * (r * r);
+	}
+
+A:
+
+===========
+
+Q: Write a function 'power' that returns parameter 'val' raised to the power of parameter 'n', e.g. power(2, 4) returns 16.
+
+A:
+
+	var power = function(val, n) {
+		if (n === 0)
+			return 1;
+
+		return val * power(val, n-1);
+	}
+===========
+
+Q: Write a function 'concat' that concatenates together a list of strings, e.g. concat(['abc', 'def', 'ghi']) returns 'abcdefghi'.
+(Remember, the + operator concatenates strings.)
+
+
+A:
+var concat = function(list) {
+	var str = ""k;
+	for(var i = 0; i < list.length; i++) {
+		str += list[i];
+	}
+	return str;
+}
+===========
+
+Q: Write a function 'reverseString' that reverses a string, e.g. reverseString('Hi, there.') returns '.ereht ,iH'.
+(HINT: Use the .charAt method to access individual characters of a string, e.g. 'foo'.charAt(0) returns 'f').
+
+A:
+	var reverseString = function(str) {
+		var new_str = "";
+		for(var i = (str.length); i > 0; --i) {
+			str += str.charAt(i);
+		}
+		return new_str;
+	}
+
+===========
+

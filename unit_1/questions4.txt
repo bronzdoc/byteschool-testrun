@@ -1,7 +1,7 @@
 Q: If I have 10 bits, how many unique values can I represent?
 
 A:
-2^9 unique values
+2^9 unique values // brian answer 2^10
 
 ============
 
@@ -14,7 +14,7 @@ A:
 Q: What is 100_1110_1101b in hex?
 
 A:
-4ED
+0x4ED
 ============
 
 Q: Express -9 in one's complement form.
@@ -30,5 +30,5 @@ A:
 ============
 
 Q: Approximate 362 in floating point with 6 mantissa bits and 8 exponent bits (in excess-128 form).
-
+// got trouble with this
 A:

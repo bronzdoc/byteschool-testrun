@@ -133,7 +133,7 @@ Q: Is the following a legal identifier (i.e. a legal variable name)?
 	h$234
 
 A:
-no
+no //brian anwser yes
 =================
 
 Q: Is the following a legal identifier (i.e. a legal variable name)?
@@ -158,7 +158,7 @@ Q: Put a pair of parentheses around every operation which isn't already in paren
 
 A:
 
-(3 + (5 * 7))
+	(3 + (5 * 7))
 =================
 
 Q: Put a pair of parentheses around every operation which isn't already in parentheses:
@@ -167,7 +167,7 @@ Q: Put a pair of parentheses around every operation which isn't already in paren
 
 A:
 
-(3 + (5 * 7)
+	(3 + 5) * 7)
 =================
 
 Q: Put a pair of parentheses around every operation which isn't already in parentheses:
@@ -176,7 +176,7 @@ Q: Put a pair of parentheses around every operation which isn't already in paren
 
 A:
 
-(x > 3) || (x < 0)
+	((x > 3) || (x < 0))
 =================
 
 Q: Put a pair of parentheses around every operation which isn't already in parentheses:
@@ -185,7 +185,7 @@ Q: Put a pair of parentheses around every operation which isn't already in paren
 
 A:
 
-foo = ('hello, ' + 'there'
+	(foo = ('hello, ' + 'there'))
 =================
 
 Q: Put a pair of parentheses around every operation which isn't already in parentheses:
@@ -193,7 +193,7 @@ Q: Put a pair of parentheses around every operation which isn't already in paren
 	bar = 3 + (foo = 9)
 
 A:
-bar = (3 + (foo = 9))
+	(bar = (3 + (foo = 9)))
 
 =================
 
@@ -203,7 +203,7 @@ Q: Put a pair of parentheses around every operation which isn't already in paren
 
 A:
 
-(-x * 2)
+	((-x) * 2)
 =================
 
 
@@ -212,7 +212,7 @@ Q: Is this an expression or a statement?
 	97
 
 A:
-statement
+expression
 =================
 
 Q: Is this an expression or a statement?
@@ -220,7 +220,7 @@ Q: Is this an expression or a statement?
 	'hello'
 
 A:
-statement
+expresion
 =================
 
 Q: Is this an expression or a statement?
@@ -272,7 +272,7 @@ Q: Is this expression a valid target of assignment? In other words, can it legal
 	3 + foo
 
 A:
-yes
+no
 
 =================
 
@@ -282,7 +282,7 @@ Q: Write a function 'isPrime' that returns true if its argument is a prime numbe
 A:
  var isPrime = function(x) {
 	 for(var i = 2; i < x; i++) {
-		 if(x % i == 0)
+		 if(x % i === 0)
 			 return false;
 	 }
 	 return true;
@@ -322,7 +322,7 @@ Q: Which variables are global? Which are local to function foo? Which are local 
 A:
 global : x
 foo:  a, b, z
-bar: j, k, l, y
+bar: j, k, l, y   // have doubt about this one
 
 =================
 
@@ -338,7 +338,6 @@ Q: How many variables are in this code?
 
 A:
 5
-
 =================
 
 Q: How does the local variable x of the first call affect the second call? (trick question)
@@ -361,7 +360,6 @@ Q: How many arguments does this function call have?
 
 A:
 3
-
 =================
 
 Q: How many parameters does this function have?
@@ -400,7 +398,7 @@ Q: Is this an expression or a statement?
 	}
 
 A:
-expresion
+statement
 =================
 
 

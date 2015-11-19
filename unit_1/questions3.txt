@@ -9,14 +9,14 @@ Q: Write a function foo with one parameter x that returns x multiplied by 5.
 
 A:
 	function foo x
-    		return x * 5;
+    		return (mul x 5)
 ============
 
 Q: Write a function foo with two parameters, x and y, that returns y subtracted from x
 
 A:
-	function  foo x y
-    		return x - y;
+	function foo x y
+    		return (sub x y)
 ============
 
 Q: If two functions have variables with the same name, what is the relationship between those variables? (trick question)
@@ -60,8 +60,8 @@ A:
 	#define list....
 	as i 0
 	while (lt i (len my_list))
-		as i (add i 1)
 		(print (get my_list i))
+		as i (add i 1)
 ============
 
 Q: Write a function 'copyList' that takes a list as argument and returns a new list with all the elements of the original.
@@ -71,9 +71,9 @@ A:
 	function copyList list
 		as new_list (list)
 		as i 0
-		while (lt i (len my_list))
-			as i (add i 1)
+		while (lt i (len list))
 			(append new_list (get list i))
+			as i (add i 1)
 		return new_list
 
 ============
@@ -86,8 +86,8 @@ A:
 		as new_list (list)
 		as i (sub (len my_List) 1)
 		while (gte i 0)
-			as i (sub i 1)
 			(append new_list (get list i))
+			as i (sub i 1)
 		return new_list
 
 ============
