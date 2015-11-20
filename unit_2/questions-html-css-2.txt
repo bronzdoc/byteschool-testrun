@@ -1,0 +1,61 @@
+Q: Which paragraphs will be red text?
+
+<html>
+<head>
+<style>
+	.foo {
+		color: red;
+	}
+</style>
+</head>
+
+<body>
+	<p class="foo">Call me Ishmael. Some years ago-never mind how long precisely-having little or no money in my purse, and nothing particular to interest me on shore, I thought I would sail about a little and see the watery part of the world. It is a way I have of driving off the spleen and regulating the circulation.</p>
+
+	<p id="foo">Whenever I find myself growing grim about the mouth; whenever it is a damp, drizzly November in my soul; whenever I find myself involuntarily pausing before coffin warehouses, and bringing up the rear of every funeral I meet; and especially whenever my hypos get such an upper hand of me, that it requires a strong moral principle to prevent me from deliberately stepping into the street, and methodically knocking people's hats off-then, I account it high time to get to sea as soon as I can.</p>
+
+	<p class="foo">This is my substitute for pistol and ball. With a philosophical flourish Cato throws himself upon his sword; I quietly take to the ship. There is nothing surprising in this. If they but knew it, almost all men in their degree, some time or other, cherish very nearly the same feelings towards the ocean with me.</p>
+</body>
+</html>
+
+A:
+1st and 3rd
+
+===========
+
+Q: Add a style rule that makes the text of every div bold and 14pt font and give each div a 35px bottom margin.
+
+<html>
+<head>
+<style>
+    div {
+        font-size: 14px;
+        font-weight: bold;
+        margin-bottom: 35px;
+    }
+</style>
+</head>
+
+<body>
+	<div>Call me Ishmael. Some years ago-never mind how long precisely-having little or no money in my purse, and nothing particular to interest me on shore, I thought I would sail about a little and see the watery part of the world. It is a way I have of driving off the spleen and regulating the circulation.</div>
+
+	<div>Whenever I find myself growing grim about the mouth; whenever it is a damp, drizzly November in my soul; whenever I find myself involuntarily pausing before coffin warehouses, and bringing up the rear of every funeral I meet; and especially whenever my hypos get such an upper hand of me, that it requires a strong moral principle to prevent me from deliberately stepping into the street, and methodically knocking people's hats off-then, I account it high time to get to sea as soon as I can.</div>
+
+	<div>This is my substitute for pistol and ball. With a philosophical flourish Cato throws himself upon his sword; I quietly take to the ship. There is nothing surprising in this. If they but knew it, almost all men in their degree, some time or other, cherish very nearly the same feelings towards the ocean with me.</div>
+</body>
+</html>
+
+A:
+
+==========
+
+
+Q: Add to the page a form with a text input and a submit button. The form should submit a POST request to the URL of its own page.
+
+A:
+ <form method=POST>
+    <input type="text" placeholder="enter text..." />
+    <input type="submit" value="submit" />
+ </form>
+
+==========

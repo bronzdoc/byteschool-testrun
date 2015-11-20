@@ -1,0 +1,437 @@
+To see the code in action, copy paste a question's html exceprt into a file named 'something.html' and then open the file in your browser. When you make chages to the file, save it and hit F5 to reload the page.
+
+Some code may not work properly in Internet Explorer. Use Firefox, Chrome, or Safari instead.
+
+==========
+
+Q: Add a click handler that will run when we click in the #ducks div. The handler should call alert('hi').
+
+HINT: method addEventListener takes three arguments: a string (specifying the type of event),
+a handler function (taking one parameter), and a boolean (true for capture phase, false for bubble phase).
+
+HINT: Yes, I know the pictured bird is actually a goose.
+
+
+<html>
+<head>
+</head>
+
+<body>
+	<div id="ducks">
+		<img src="http://i.imgur.com/UZm41FD.gif"/>
+		<img src="http://i.imgur.com/UZm41FD.gif"/>
+	</div>
+</body>
+
+<script>
+	var div = document.getElementById('ducks');
+	div.addEventListener(
+            "click",
+            function(event){
+                alert("hi");
+            },
+            false
+    )
+</script>
+</html>
+
+A:
+
+==========
+
+Q: Here we've modified the answer of the previous question by adding another click handler, but
+this one is registered on the first img rather than the div. When we click on the first img, both
+handlers will run, but which handler will run first? If we change the boolean argument to
+either .addEventListener call, why does the order change?
+
+
+
+<html>
+<head>
+</head>
+
+<body>
+	<div id="ducks">
+		<img src="http://i.imgur.com/UZm41FD.gif"/>
+		<img src="http://i.imgur.com/UZm41FD.gif"/>
+	</div>
+</body>
+
+<script>
+	var div = document.getElementById('ducks');
+	var firstImg = div.children[0];
+
+	firstImg.addEventListener(
+            'click',
+            function (evt) {
+                alert('img handler');
+            },
+		    false
+	);
+	div.addEventListener(
+            'click',
+            function (evt) {
+			    alert('div handler');
+		    },
+		    false
+	);
+</script>
+</html>
+
+
+A:
+it will run first the image one, if we change the phase in the div element it will be triggered first
+
+==========
+
+Q: Here, we've modified the first click handler from the previous example. Why now does clicking on
+the second duck display an alert but clicking on the first duck does not?
+
+
+<html>
+<head>
+</head>
+
+<body>
+	<div id="ducks">
+		<img src="http://i.imgur.com/UZm41FD.gif"/>
+		<img src="http://i.imgur.com/UZm41FD.gif"/>
+	</div>
+</body>
+
+<script>
+	var div = document.getElementById('ducks');
+	var firstImg = div.children[0];
+
+	firstImg.addEventListener(
+		'click',
+		function (evt) {
+			evt.stopPropagation();
+		},
+		false
+	);
+	div.addEventListener(
+		'click',
+		function (evt) {
+			alert('div handler');
+		},
+		false
+	);
+</script>
+</html>
+
+A:
+because we are stoping the event propagation, so the div click handler never gets triggered
+=============
+
+Q: Add a click handler to div #ducks that changes the border color of the clicked image to red.
+
+HINT: The element representing the image clicked on will be the .target property of the event
+object passed to the handler.
+
+Every element has a .style property, and style objects have a .borderColor property.
+
+Therefore:
+
+	event.target.style.borderColor = 'red';
+
+
+
+
+<html>
+<head>
+	<style>
+		img {
+			border: 5px solid black;
+			padding: 20px;
+		}
+	</style>
+</head>
+
+<body>
+	<div id="ducks">
+		<img src="http://i.imgur.com/UZm41FD.gif"/>
+		<img src="http://i.imgur.com/UZm41FD.gif"/>
+		<img src="http://i.imgur.com/UZm41FD.gif"/>
+		<img src="http://i.imgur.com/UZm41FD.gif"/>
+		<img src="http://i.imgur.com/UZm41FD.gif"/>
+		<img src="http://i.imgur.com/UZm41FD.gif"/>
+		<img src="http://i.imgur.com/UZm41FD.gif"/>
+		<img src="http://i.imgur.com/UZm41FD.gif"/>
+	</div>
+</body>
+
+<script>
+	var div = document.getElementById('ducks');
+    div.addEventListener(
+            "click",
+            function(event){
+	            event.target.style.borderColor = 'red';
+            },
+            false
+    );
+</script>
+</html>
+
+
+A:
+
+================
+
+Q: Add a click handler to div #ducks that changes the border color of the clicked image to red...but only
+one image should have a red border at any time. In other words, set the previously clicked image's border back to black.
+
+HINT: Save the last-clicked target to a global variable so you can set it back to black upon the next click.
+
+
+
+<html>
+<head>
+	<style>
+		img {
+			border: 5px solid black;
+			padding: 20px;
+		}
+	</style>
+</head>
+
+<body>
+	<div id="ducks">
+		<img src="http://i.imgur.com/UZm41FD.gif"/>
+		<img src="http://i.imgur.com/UZm41FD.gif"/>
+		<img src="http://i.imgur.com/UZm41FD.gif"/>
+		<img src="http://i.imgur.com/UZm41FD.gif"/>
+		<img src="http://i.imgur.com/UZm41FD.gif"/>
+		<img src="http://i.imgur.com/UZm41FD.gif"/>
+		<img src="http://i.imgur.com/UZm41FD.gif"/>
+		<img src="http://i.imgur.com/UZm41FD.gif"/>
+	</div>
+</body>
+
+<script>
+    var last_clicked;
+	var div = document.getElementById('ducks');
+    div.addEventListener(
+            "click",
+            function(evt) {
+                if (last_clicked) last_clicked.style.borderColor = "black";
+
+                evt.target.style.borderColor = "red";
+                last_clicked = evt.target;
+            },
+            false
+    );
+</script>
+</html>
+
+
+A:
+
+=========
+
+Q: Create a function 'randColor' that returns a random color (expressed in '#FFFFFF' form).
+
+HINT: Math.random() returns a random number from 0.0 up to 1.0 (but not including 1.0 itself)
+
+Math.floor(n) returns the next lowest integer, e.g.  Math.floor(3.4) returns 3.
+
+To randomly select an element of an array 'foo':
+
+	foo[Math.floor(Math.random() * foo.length)]
+
+Create an array:
+
+	var digits = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'];
+
+...and then randomly select six strings from this array and concatenate them toghether with a '#' in front.
+
+
+A:
+    var randColor = function() {
+        var rand_color = "#";
+	    var digits = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'];
+        for(var i = 0; i < 6; i++)
+	       rand_color += digits[Math.floor(Math.random() * digits.length)];
+
+        return rand_color;
+    }
+============
+
+Q: Add a click handler on the div #ducks that sets the background color of the div to a random color (copy-paste the 'randColor' function from earlier).
+
+HINT: Set the .style.backgroundColor property.
+
+
+<html>
+<head>
+	<style>
+		img {
+			border: 5px solid black;
+			padding: 20px;
+		}
+	</style>
+</head>
+
+<body>
+	<div id="ducks">
+		<img src="http://i.imgur.com/UZm41FD.gif"/>
+		<img src="http://i.imgur.com/UZm41FD.gif"/>
+		<img src="http://i.imgur.com/UZm41FD.gif"/>
+		<img src="http://i.imgur.com/UZm41FD.gif"/>
+		<img src="http://i.imgur.com/UZm41FD.gif"/>
+		<img src="http://i.imgur.com/UZm41FD.gif"/>
+		<img src="http://i.imgur.com/UZm41FD.gif"/>
+		<img src="http://i.imgur.com/UZm41FD.gif"/>
+	</div>
+</body>
+
+<script>
+	// copy-paste 'randColor' function here
+    var randColor = function() {
+        var rand_color = "#";
+	    var digits = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'];
+        for(var i = 0; i < 6; i++)
+	       rand_color += digits[Math.floor(Math.random() * digits.length)];
+
+        return rand_color;
+    }
+
+	var div = document.getElementById('ducks');
+    div.addEventListener(
+            "click",
+            function(evt){
+                evt.target.style.background = randColor();
+            },
+            false
+    );
+</script>
+</html>
+
+A:
+
+============
+
+
+Q: Every time the user clicks anywhere in the div #ducks, set each img background to a different random color.
+
+HINT: Loop through array div.children to access each img.
+
+
+<html>
+<head>
+	<style>
+		img {
+			border: 5px solid black;
+			padding: 20px;
+		}
+	</style>
+</head>
+
+<body>
+	<div id="ducks">
+		<img src="http://i.imgur.com/UZm41FD.gif"/>
+		<img src="http://i.imgur.com/UZm41FD.gif"/>
+		<img src="http://i.imgur.com/UZm41FD.gif"/>
+		<img src="http://i.imgur.com/UZm41FD.gif"/>
+		<img src="http://i.imgur.com/UZm41FD.gif"/>
+		<img src="http://i.imgur.com/UZm41FD.gif"/>
+		<img src="http://i.imgur.com/UZm41FD.gif"/>
+		<img src="http://i.imgur.com/UZm41FD.gif"/>
+	</div>
+</body>
+
+<script>
+	// insert 'randColor' function here
+    var randColor = function() {
+        var rand_color = "#";
+	    var digits = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'];
+        for(var i = 0; i < 6; i++)
+	       rand_color += digits[Math.floor(Math.random() * digits.length)];
+
+        return rand_color;
+    }
+
+	// insert code here
+	var div = document.getElementById('ducks');
+    div.addEventListener(
+            "click",
+            function(evt){
+                var children = div.children;
+                for (var i = 0; i < children.length; i++) {
+                    children[i].style.background = randColor();
+                }
+            },
+            false
+    );
+
+</script>
+</html>
+
+
+A:
+
+========
+
+Q: In Javascript, create an img element and set its src to http://i.imgur.com/MjdKq.jpg . Insert the new img element into the div #ducks with 'appendChild'.
+
+HINT:
+
+	var newDiv = document.createElement('div');
+	newDiv.setAttribute('alex', '3');           // gives the new div an attribute alex="3"
+
+	var foo = document.getElementById('foo');   // get element with id 'foo' (assume the element is a div)
+	foo.appendChild(newDiv);                    // append the new div to foo's children array
+
+	// NOTE: this will not work! The children array is not an ordinary JS array. Must use .appendChild() instead.
+	foo.children[foo.children.length] = newDiv;
+
+
+<html>
+<head>
+</head>
+
+<body>
+	<div id="ducks">
+		<img src="http://i.imgur.com/UZm41FD.gif"/>
+		<img src="http://i.imgur.com/UZm41FD.gif"/>
+	</div>
+</body>
+
+<script>
+	var div = document.getElementById('ducks');
+    var img = document.createElement("img");
+
+    img.setAttribute("src", "http://i.imgur.com/MjdKq.jpg");
+    div.appendChild(img);
+</script>
+</html>
+
+
+
+============
+
+
+Q: How many child nodes does the div #ducks have?
+
+<html>
+<head>
+</head>
+<body>
+	<div id="ducks">
+		Hello, I'd like to talk to you about ducks.
+		<img src="http://i.imgur.com/UZm41FD.gif"/>
+		Rubber baby buggy bumper
+		<div>
+			Wherever you go, there you are.
+			<img src="http://i.imgur.com/UZm41FD.gif"/>
+		</div>
+	</div>
+</body>
+</html>
+
+
+A:
+    4
+-------------
+
+

@@ -1,0 +1,39 @@
+Q: Write an html page with an image (use URL 'http://i.imgur.com/XwoM5.jpg') and the title, 'My first web page'.
+
+A:
+
+===========
+
+Q: With the previous exercise, make the image into a link to 'http://zombo.com'.
+
+A:
+
+==========
+
+Q: To the previous exercise, add a header reading 'War & Peace'
+
+A:
+
+==========
+
+Q: To the previous exercise, add an unordered list of the Seven Dwarfs.
+
+A:
+
+==========
+
+Q: To the previous exercise, add a multiplication table of the numbers 1 to 4 (use a table tag), e.g.:
+
+1   2   3   4
+2   4   6   8
+3   6   9   12
+4   8   12  16
+
+NOTE: The table won't look pretty, but don't worry about that for now.
+
+A:
+
+
+
+
+
