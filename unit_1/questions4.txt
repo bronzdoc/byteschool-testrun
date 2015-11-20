@@ -30,5 +30,7 @@ A:
 ============
 
 Q: Approximate 362 in floating point with 6 mantissa bits and 8 exponent bits (in excess-128 form).
-// got trouble with this
+
 A:
+2^8 10000000
+362-256

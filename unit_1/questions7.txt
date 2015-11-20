@@ -207,7 +207,7 @@ Q: Write a function 'concat' that concatenates together a list of strings, e.g. 
 
 A:
 var concat = function(list) {
-	var str = ""k;
+	var str = "";
 	for(var i = 0; i < list.length; i++) {
 		str += list[i];
 	}
@@ -219,9 +219,10 @@ Q: Write a function 'reverseString' that reverses a string, e.g. reverseString('
 (HINT: Use the .charAt method to access individual characters of a string, e.g. 'foo'.charAt(0) returns 'f').
 
 A:
+	var str = "doc";
 	var reverseString = function(str) {
 		var new_str = "";
-		for(var i = (str.length); i > 0; --i) {
+		for(var i = str.length; i > 0; --i) {
 			str += str.charAt(i);
 		}
 		return new_str;
