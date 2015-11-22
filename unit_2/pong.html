@@ -1,0 +1,205 @@
+<html>
+<head>
+    <title>Pong</title>
+    <style>
+#wrapper {
+    width: 1000;
+    height: 600;
+    margin: 0 auto;
+}
+    </style>
+</head>
+<body>
+    <div id="wrapper">
+        <canvas id="PongCanvas"/>
+    </div>
+    <button onclick="startGame()">start game</button>
+    <button onclick="stopGame()">stop game</button>
+</body>
+
+<script>
+
+var canvas = document.getElementById('PongCanvas');
+var ctx = canvas.getContext('2d');
+
+var WIDTH = 1000;
+var HEIGHT = 600;
+
+canvas.width = WIDTH;
+canvas.height = HEIGHT;
+
+var keyWPressed = false;
+var keySPressed = false;
+var keyArrowUpPressed = false;
+var keyArrowDownPressed = false;
+
+var CanvasObject = {
+    width: "10",
+    height: "100",
+    x: 20,
+    y: 200,
+    color: 'white',
+    ctx: canvas.getContext('2d'),
+
+    /* Draw CanvasObject to canvas */
+    draw: function(color) {
+        if (color) {
+            this.ctx.fillStyle = color;
+        } else {
+            // set to default color if not specified
+            this.ctx.fillStyle = this.color;
+        }
+
+        // Draw the canvas object to the canvas
+        this.ctx.fillRect(this.x, this.y, this.width, this.height);
+    },
+}
+
+/* CreateBall
+** Creates a new ball
+* @width<int> specifies the width of the ball
+* @height<int> specifies the height of the ball
+* @color<string> specifies the color of the ball
+*/
+var createBall = function(width, height, color) {
+    var new_ball = Object.create(CanvasObject, {
+        dx: { value: 3, writable: true },
+        dy: { value: 3, writable: true }
+    });
+
+    // Add new values to properties
+    if (width) new_ball.width   = width;
+    if (height) new_ball.height = height;
+    if (color) new_ball.color   = color;
+
+    // Display ball in a random place
+    new_ball.x = 200;
+    new_ball.y = 200;
+
+    return new_ball;
+}
+
+/* CreatePlayer
+** Creates a new player
+* @width<int> specifies the width of the ball
+* @height<int> specifies the height of the ball
+* @cords<int> specifies the height of the ball
+* @color<string> specifies the color of the ball
+*/
+createPlayer = function(width, height, cords, color) {
+    var new_player = Object.create(CanvasObject, {
+        score: { value: 0, writable: 0 }
+    });
+
+    // Override defaults
+    if (width) new_player.width   = width;
+    if (height) new_player.height = height;
+    if (color) new_player.color   = color;
+    if (cords.x) new_player.x     = cords.x;
+    if (cords.y) new_player.y     = cords.y;
+
+    return new_player;
+}
+
+var ball = createBall(10, 10);
+var player_1 = createPlayer(15, 100, {x: 20, y: 200});
+var player_2 = createPlayer(15, 100, {x: (canvas.width - 40), y: 200});
+
+function update() {
+    // insert code here to update the game state for the next frame
+    if (keyArrowUpPressed)   player_1.y -= 10;
+    if (keyArrowDownPressed) player_1.y += 10;
+
+    // Update players score
+    if (ball.x >= canvas.width) {
+        player_1.score++;
+    } else if (ball.x <= 0) {
+        player_2.score++;
+    }
+
+    // Handle ball and player collision
+    if (ball.x < (player_1.x + player_1.width)) {
+        ball.dx = 3;
+    }
+
+    // Ball and player interaction
+    if (ball.x >= canvas.width) {
+        ball.dx = -3;
+    } else if (ball.x <= 0) {
+        ball.dx = 3;
+    }
+
+    ball.x += ball.dx;
+    console.log(ball.x);
+}
+
+function reset() {
+    // insert code here to reset the game state
+}
+
+function draw() {
+    ctx.fillStyle = 'black';
+    ctx.fillRect(0, 0, WIDTH, HEIGHT);
+
+    // insert code here to draw the current state
+    ball.draw();
+    player_1.draw();
+    player_2.draw();
+}
+
+// the player can hold down both keys at once, but
+// we want the last pressed key to take precedence
+window.addEventListener('keydown', function (evt) {
+    if (evt.keyCode === 87) {
+        keyWPressed = true;
+        keySPressed = false;
+    } else if (evt.keyCode === 83) {
+        keySPressed = true;
+        keyWPressed = false;
+    } else if (evt.keyCode === 38) {
+        keyArrowUpPressed = true;
+        keyArrowDownPressed = false;
+    } else if (evt.keyCode === 40) {
+        keyArrowDownPressed = true;
+        keyArrowUpPressed = false;
+    } else if (evt.keyCode === 82) {
+        // when a player has won, pressing 'r' resets the game
+        if (winner) {
+            restartGame();
+        }
+    }
+});
+
+window.addEventListener('keyup', function (evt) {
+    if (evt.keyCode === 87) {   // 'w'
+        keyWPressed = false;
+    } else if (evt.keyCode === 83) { // 's'
+        keySPressed = false;
+    } else if (evt.keyCode === 38) {  // up arrow
+
+    } else if (evt.keyCode === 40) { // down arrow
+        keyArrowDownPressed = false;
+    }
+});
+
+var on = true;
+var startGame = function() {
+    on = true;
+    gameloop();
+}
+var stopGame = function() {
+    on = false;
+}
+
+function gameloop() {
+    if (!on) return;
+    console.log('looping');
+    update();
+    draw();
+    window.requestAnimationFrame(gameloop);
+}
+gameloop();
+
+
+</script>
+</html>
