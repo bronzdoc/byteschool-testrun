@@ -105,10 +105,16 @@ var ball = createBall(10, 10);
 var player_1 = createPlayer(15, 100, {x: 20, y: 200});
 var player_2 = createPlayer(15, 100, {x: (canvas.width - 40), y: 200});
 
+/* Update the game state for the next frame */
 function update() {
-    // insert code here to update the game state for the next frame
+
+    // Move player 1
     if (keyArrowUpPressed)   player_1.y -= 10;
     if (keyArrowDownPressed) player_1.y += 10;
+
+    // Move player 2
+    if (keyWPressed) player_2.y -= 10;
+    if (keySPressed) player_2.y += 10;
 
     // Update players score
     if (ball.x >= canvas.width) {
@@ -117,17 +123,22 @@ function update() {
         player_2.score++;
     }
 
-    // Handle ball and player collision
-    if (ball.x < (player_1.x + player_1.width)) {
+    /* Handle ball and player collision */
+    if (ball.x < (player_1.x + player_1.width) && (ball.x + ball.width) > player_1.x  &&
+        ball.y < (player_1.y + player_1.height) && (ball.y + ball.height) > player_1.y) {
         ball.dx = 3;
     }
 
-    // Ball and player interaction
-    if (ball.x >= canvas.width) {
+    if (ball.x > (player_2.x - player_2.width) ) {
         ball.dx = -3;
-    } else if (ball.x <= 0) {
-        ball.dx = 3;
     }
+
+    // Ball and player interaction
+    //if (ball.x >= canvas.width) {
+    //    ball.dx = -3;
+    //} else if (ball.x <= 0) {
+    //    ball.dx = 3;
+    //}
 
     ball.x += ball.dx;
     console.log(ball.x);
@@ -176,7 +187,7 @@ window.addEventListener('keyup', function (evt) {
     } else if (evt.keyCode === 83) { // 's'
         keySPressed = false;
     } else if (evt.keyCode === 38) {  // up arrow
-
+        keyArrowUpPressed = false;
     } else if (evt.keyCode === 40) { // down arrow
         keyArrowDownPressed = false;
     }
