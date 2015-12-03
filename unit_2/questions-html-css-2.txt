@@ -54,7 +54,7 @@ Q: Add to the page a form with a text input and a submit button. The form should
 
 A:
  <form method=POST>
-    <input type="text" placeholder="enter text..." />
+    <input type="text" name="input_1" placeholder="enter text..." />
     <input type="submit" value="submit" />
  </form>
 

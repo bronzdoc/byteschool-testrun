@@ -187,7 +187,6 @@ var createBall = function(width, height, color) {
 
     // Override reset
     new_ball.reset = function() {
-        console.log("got in ball");
         this.x = (WIDTH / 2);
         this.y = (HEIGHT / 2);
     }
@@ -250,7 +249,6 @@ function update() {
     if (ball.x > canvas.width) {
         player_1.score++;
         player_1.scored = true;
-
         score_board.update();
         ball.reset();
     } else if (ball.x < 0) {

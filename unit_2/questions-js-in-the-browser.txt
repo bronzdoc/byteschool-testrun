@@ -31,7 +31,7 @@ HINT: Yes, I know the pictured bird is actually a goose.
                 alert("hi");
             },
             false
-    )
+    );
 </script>
 </html>
 
