@@ -1,0 +1,195 @@
+Every instruction in MIPS is 32-bits long.
+
+
+The instructions come in three formats:
+
+R (register) type
+I (immediate) type
+J (jump) type
+
+In all three formats, the first six bits is the opcode, the part that designates the type of action to perform.
+
+In J instructions, the remaining 26 bits are used to specify an address.
+
+In I instructions, the 10 bits after the opcode are used to specify two registers (5 bits each), and the remaining 16 bits are used to specify an immediate value (a fancy assembler term for 'number'). In some I instructions, only one register is used, and so half of the register bits are ignored.
+
+In R instructions, the 15 bits after the opcode are used to specify three registers (5 bits each), the next 5 bits specify an immediate value used only by shift instructions, and the last 6 bits are called the function bits. The function bits effectively extend the opcode bits to distinguish between more instructions.
+
+
+So let's start with a simple task: store the value 0xFFFFAAAA in register 4. Strangely, though, there isn't any single instruction that will do this directly. Instead, we will need two separate instructions:
+
+(Notation: $a, $b, $c = registers, i = immediate value)
+
+	lui	$a, i	
+		load upper immediate: copy i to upper 16-bits of $a, setting the lower bits all to 0
+	
+	ori	$a, $b, i
+		or immediate: logical 'or' together $b and i, result stored in $1
+		(the immediate value is zero-extended to full 32 bits, e.g. immediate 0xFFFF is treated as 0x0000FFFF)
+
+So we can write:
+	
+	lui $4, 0xFFFF
+	ori $4, $4, 0xAAAA
+	# $4 now has the value 0xFFFFAAAA
+
+The lui instruction sets the register to 0xFFFF0000. The ori instruction stores in register 4 the result of or'ing register 4 with 0x0000AAAA: the result of (0xFFFF0000 or 0x0000AAAA) is 0xFFFFAAAA.
+
+(It's helpful to remember that all instructions ending with an 'i' take an immediate, all instructions taking an immediate operand end with 'i', and the immediate is always the last operand.)
+
+
+Most MIPS assemblers support pseudo-instructions. A psuedo-instruction is not recognized by the hardware, but the assembler will generate the necessary machine instructions to accomplish the desired effect. For example, the psuedo-instruction li (load immediate) stores a 32-bit immediate value in a register, but the assembler translates li to actual machine instructions:
+
+	li $3, 0x0F0FADAD   # store 0x0F0FADAD in register 3
+
+The assembler replaces this with actual machine instructions that produce the same effect:
+
+	lui $3, 0x0F0F        # 'load upper immediate'
+	ori $3, $3, 0xADAD    # 'or immediate'
+
+(We'll explain these two instructions later.)
+
+Some psuedo-instructions will modify register 1. Therefore, if we use psuedo-instructions, we should avoid using register 1 explicitly. Register 1 is by convention reserved for use by the assembler.
+
+Most MIPS assemblers support a few hundred psuedo-instructions, but we will avoid using most of them so as to focus on the acutal machine instructions.
+
+
+
+The primary bit logic instructions are:
+
+	and $a, $b, $c
+		logical and: store in $a the result of and'ing the corresponding bits of $b and $c
+
+	or $a, $b, $c
+		logical or: store in $a the result of or'ing the corresponding bits of $b and $c
+
+	xor $a, $b, $c
+		logical exclusive or: store in $a the result of exclusive or'ing the corresponding bits of $b and $c
+
+For example:
+
+	and $3, $7, $6      # store in $3 the result of ($7 AND $6)
+	or $6, $7, $6		# store in $6 the result of ($7 OR $6)
+	xor $4, $4, $4		# store in $4 the result of ($4 XOR $4)
+
+(Notice that the same register can be used for two of the operands or even as all three.)
+
+What exactly does it mean to do an AND, OR, and XOR on bits?
+
+AND returns 1 only when both bits are 1:
+
+	1 AND 1 -> 1
+	1 AND 0 -> 0
+	0 AND 1 -> 0
+	0 AND 0 -> 0
+
+OR returns 1 when either (or both) bits are 1:
+
+	1 OR 1 -> 1
+	1 OR 0 -> 1
+	0 OR 1 -> 1
+	0 OR 0 -> 0
+
+XOR returns 1 when one (and only one) bit is 1:
+
+	1 XOR 1 -> 0
+	1 OR 0 -> 1
+	0 OR 1 -> 1
+	0 OR 0 -> 0
+
+When logically comparing multiple bits, we perform the operation on each corresponding bit, e.g.:
+
+	100 AND 101 -> 100   (only the first bits were both 1's)
+
+	100 OR 101 -> 101    (the first and last bits had a 1 in either operand)
+
+	100 XOR 101 -> 001   (only last bit was different in the two operands, so only last bit is 1)
+
+
+So say we have 0xF0F0F0F0 in register 6 and 0x0000FFFF in register 7:
+
+	and $5, $6, $7      # store in $5 the result of ($6 AND $7), which is 0x0000F0F0
+	or $5, $6, $7       # store in $5 the result of ($6 OR $7), which is 0xF0F0FFFF
+	xor $5, $6, $7      # store in $5 the result of ($6 XOR $7), which is 0xF0F00F0F
+
+
+The andi, ori, and xori instructions take an immediate operand instead of a third register:
+
+	andi $3, $5, 0xABCD     # store in $3 the result of ($5 AND 0xABCD)
+	ori	$10, $2, 0xABCD		# store in $10 the result of ($2 OR 0xABCD)
+	xori $11, $11, 0xABCD   # store in $11 the result of ($11 XOR 0xABCD)
+
+The immediate values are (as always) just 16 bits, but for the purpose of these operations, they are 'zero-extended' to a full 32 bits, e.g. immediate value 0xFFFF is treated as 0x0000FFFF.
+
+
+The nor instruction performs an OR operation and then negates (flips) all of the bits in the result:
+
+	# assume $4 = 0xFFFF0000, and remember $0 is always 0x00000000
+	or $3, $4, $0      # store in $5 the result of ($4 OR $0), which is 0xFFFF0000
+	nor $3, $4, $0     # store in $5 the result of negating ($4 OR $0), which will be 0x0000FFFF
+
+
+
+The shift instructions move the bits in a register to the left or right by some number of places:
+
+	sll $a, $b, i
+		shift left logical: store in $a the bits of $b shifted left i places
+	srl $a, $b, i
+		shift right logical: store in $a the bits of $b shifted right i places
+
+Bits shifted out of the register get discarded. Bits shifted into the register are zeroes. For example (for brevity, we'll consider shifting single bytes):
+
+	0000_1111 shifted left by 2 places returns 0011_1100
+	0000_1111 shifted right by 2 places returns 0000_0011
+	1010_1010 shifted left by 5 places returns 0100_0000
+
+In code:
+
+	li $5, 0xFFFFFFFF   # 1111_1111 1111_1111 1111_1111 1111_1111
+
+	sll $3, $5, 1		# store in $3 the value 0xFFFFFFFE   
+						# (1111_1111 1111_1111 1111_1111 1111_1110)
+	
+	sll $3, $5, 2		# store in $3 the value 0xFFFFFFFC
+						# (1111_1111 1111_1111 1111_1111 1111_1100)
+
+	srl $3, $5, 1		# store in $3 the value 0x7FFFFFFF
+						# (0111_1111 1111_1111 1111_1111 1111_1111)
+
+	srl $3, $5, 2		# store in $3 the value 0x3FFFFFFF	
+						# (0011_1111 1111_1111 1111_1111 1111_1111)
+
+
+
+	li $5, 0x00FFFF00   # 0000_0000 1111_1111 1111_1111 0000_0000
+
+	sll $3, $5, 1		# store in $3 the value 0x01FFFE00  
+						# (0000_0001 1111_1111 1111_1110 0000_0000)
+	
+	sll $3, $5, 2		# store in $3 the value 0x03FFFC00
+						# (0000_0001 1111_1111 1111_1110 0000_0000)
+
+	srl $3, $5, 1		# store in $3 the value 0x007FFF80
+						# (0000_0001 1111_1111 1111_1110 0000_0000)
+
+	srl $3, $5, 2		# store in $3 the value 0x003FFFC0	
+						# (0000_0000 0011_1111 1111_1111 1100_0000)
+
+(The immediate of a shift instruction must always be an unsigned value less than or equal to 31.)
+
+
+The sra (shift right arithmetic) instruction is just like srl except the bits shifted in from the left match the highest-order bit, thereby preserving the sign:
+
+
+	li $5, 0x80FF0000   # 1000_0000 1111_1111 0000_0000 0000_0000	
+	sra $3, $5, 2		# store in $3 the value 0xE03FC000 
+						# (1110_0000 0011_1111 1100_0000 0000_0000) 
+
+	li $5, 0x00FFFF00   # 0000_0000 1111_1111 1111_1111 0000_0000
+	sra $3, $5, 2		# store in $3 the value 0x003FFFC000
+
+
+Note that highest-order bit remained unchanged after the shifts.
+
+The sllv, srlv, and srav instructions are just like sll, srl, and sra except they take a register as their third operand instead of an immediate. The value in the third register must be an unsigned value less than or equal to 31.
+
