@@ -1,0 +1,103 @@
+Q: What is the value in register 3 after running this code?
+
+	li $3, 0x000000FF
+	li $4, 0x00000001
+	add $3, $3, $4
+
+A:
+($3) 0x000000FF =>      0000 0000 0000 0000 0000 0000 1111 1111
+($4) 0x00000001 => add  0000 0000 0000 0000 0000 0000 0000 0001
+                   ---------------------------------------------
+                   $3 = 0000 0000 0000 0000 0000 0001 0000 0000
+
+                   $3 => 0x00000100
+
+
+
+=============
+
+Q: What is the value in register 3 after running this code?
+
+	li $3, 0x000000FF
+	li $4, 0x00000001
+	sub $3, $3, $4
+
+A:
+($3) 0x000000FF =>      0000 0000 0000 0000 0000 0000 1111 1111
+($4) 0x00000001 => sub  0000 0000 0000 0000 0000 0000 0000 0001
+                   ---------------------------------------------
+                   $3 = 0000 0000 0000 0000 0000 0000 1111 1110
+
+                   $3 => 0x000000FE
+
+
+=============
+
+Q: What will happen when this add instruction runs? How can we fix the problem?
+
+	li $3, 0x7FFFFFFF
+	li $4, 0x00000001
+	add $3, $3, $4
+
+A:
+($3) 0x000000FF =>      0111 1111 1111 1111 1111 1111 1111 1111
+($4) 0x00000001 => add  0000 0000 0000 0000 0000 0000 0000 0001
+                   ---------------------------------------------
+                   $3 = 1000 0000 0000 0000 0000 0000 0000 0000
+
+                   $3 => 0x8FFFFFFF
+
+The error is: postive + positive -> negative
+we can fix it by using the addu operator
+=============
+
+Q: What is the value in register 3 after running this code?
+
+	li $3, 0xFFFFFFFF
+	li $4, 0xFFFFFFFF
+	addu $3, $3, $4
+
+A:
+($3) 0xFFFFFFFF =>      1111 1111 1111 1111 1111 1111 1111 1111
+($4) 0xFFFFFFFF => add  1111 1111 1111 1111 1111 1111 1111 1111
+                   ---------------------------------------------
+                   $3 = 1111 1111 1111 1111 1111 1111 1111 1110
+
+                   $3 => 0xFFFFFFFE
+
+the las bit is discared, since it overflows
+=============
+
+Q: What is the value in register 3 after running this code?
+
+	addiu $3, $0, 0xF032
+
+
+A:
+          $3 => 0x0000F032
+=============
+
+Q: Write code that multiplies the values 7 and -5, storing the result in register 9.
+
+(Remember immediate values can be expressed in decimal, not just hex, and you can use - to indicate a negative number.)
+
+A:
+
+    li $3, 0x00000007
+    li $4, 0x80000005
+    mult $3, $4
+    mflo $9
+
+=============
+
+Q: Write code that divides 3 billion by 23, storing the remainder in register 13.
+
+(Remember that 3 billion exceeds the signed range, so we need an unsigned division.)
+
+A:
+   li $3, 0xB2D05E00
+   li $4, 0x00000017
+   dvu $3, $4
+   mfhi $13
+
+=============
