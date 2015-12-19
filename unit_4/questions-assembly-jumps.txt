@@ -1,0 +1,54 @@
+Q: If $6 is greater than zero, store in $3 the value of ($4 + $5); otherwise if $6 is not greater than zero, store in $3 the value of ($4 - $5). Afterwards, store in $4 the value of ($4 + $6).
+(You will need labels, bgtz, add, sub, and j. Do not worry about overflow.)
+
+A:
+
+li $4,0x00000005
+li $5,0x00000002
+li $6,0x00000000
+
+bgtz $6, opt1
+blez $6, opt2
+opt1:
+    add $3, $4, $5
+j afterall
+opt2:
+    sub $3, $4, $5
+afterall:
+    add $4, $4, $6
+
+=============
+
+Q: If $7 is less than or equal to zero, jump to address 0x7600FFFC, otherwise jump to address 0x70000000.
+(Use blez and jr.)
+
+A:
+
+li $a0, 0x70000000
+blez $7, 0x7600FFFC
+jr $a0
+=============
+
+Q: Translate this Javascript code into an assembly equivalent.
+
+(Use register 3 for x and register 4 for y.)
+
+	var x = 15;
+	if (x > 29) {
+		x = 35;
+	}
+	var y = x * -2;
+
+A:
+    li $3, 0x0000000F
+    sub $a0, $3, 0x00000029
+    bgtz $a0, opt1:
+    blez $a0, multy:
+
+    opt1:
+        li $3, 0x00000035
+
+    multy:
+        mult $4, $3, 0x80000002
+
+=============
