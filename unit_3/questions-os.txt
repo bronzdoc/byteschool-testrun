@@ -1,0 +1,60 @@
+Q: A ___ is a module of the OS that controls a specific device.
+
+
+A:  driver / device driver
+
+=============
+
+Q: The ___ scheduler is the part of OS that determines when processes run on the CPU cores.
+
+
+A: scheduler
+
+=============
+
+Q: What stops a program from using a CPU without letting other programs from using it too. 
+
+A: hardware interrupts. To ensure interrupts occur on a regular basis, a clock device sends interrupts to the CPU on a regular basis, say every 20ms (the amount of time is a matter of the OS's configuration).
+
+=============
+
+Q: A process makes requests to the OS by invoking a _____.
+
+A: system call
+
+=============
+
+Q: The memory used by a process is split into what three main sections?
+
+A: the text (the code), the call stack (for local variables), the heap (for other data)
+
+=============
+
+Q: The OS maps 'virtual addresses' to 'physical addresses' in chunks called ___. These chunks are typically __ KB in size.
+
+A: pages. 4 KB
+
+=============
+
+Q: A process that is not ready to continue because it is waiting for some event to occur (such as waiting for data to be read off a disk), such a process is in the ____ state.
+
+A: blocked
+
+=============
+
+Q: The storage area of a storage device is divided into one more logical sections called ___.
+
+A: partitions
+
+=============
+
+
+Q: Each partition has one special directory called its ___ directory.
+
+A: root
+
+=============
+
+Q. Say on Unix system, we have two partitions: one mounted to /, the other mounted to /apple/banana. Which partition must have been mounted first? 
+
+A. The first partition mounted is always mounted to /. After that, partitions can be mounted only to directories on already mounted partitions, e.g. /foo/bar must be mounted before /foo/bar/ack 
