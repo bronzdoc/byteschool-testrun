@@ -21,22 +21,23 @@ Becuase each dont have the same set of instructions(ISA)
 Q: Does address 0 always correspond to the first byte of RAM?
 
 A:
-yes
+my answer: yes
+
+Brian answer : the CPU's understand different sets of binary instructions
 
 ============
 
 Q: When data is copied between RAM and CPU registers, it is usually copied through ___.
 
 A:
-memory
+cache
 ============
 
 
 Q: When we copy 32-bit register A to address 500 of memory on a big-endian machine, the least-significant byte of register A is copied to address ___.
 
-
 A:
-500 + 3
+403
 
 ============
 
@@ -44,7 +45,7 @@ A:
 Q: When we copy 32-bit register A to address 500 of memory on a little-endian machine, the least-significant byte of register A is copied to address ___.
 
 A:
-500
+400
 ============
 
 Q: When we say a machine is 32-bit or 64-bit, what are we usually talking about?
