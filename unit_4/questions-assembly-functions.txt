@@ -1,0 +1,39 @@
+Q: Declare an ascii string "Harry" with the label 'name'. The string should be terminated with a null byte.
+
+A:
+name: .asciiz "Harry"
+
+===========
+
+Q: Write a function 'sum4' that takes four operands and returns their sum. Use the alternate register names.
+Assume the result will fit in a single register, and don't worry about overflow.
+(You will not need the stack or temporary or stored registers.)
+
+A:
+
+sum4:
+    add $v0, $a0, $a1
+    add $v1, $a2, $a3
+    add $v0, $v1, $v0
+    la $31, $v0
+
+===========
+
+Q: Write a function 'strLength' that returns the number of characters in an ASCII string. Assume the string is terminated by a null byte; the null byte does not count as part of the length. The address of the first byte of the string is passed as argument $a0. Return the result in $v0.
+
+A:
+
+.data
+    str: .ascii "doc"
+.text
+    strLength:
+        $v0
+
+===========
+
+Q: Write a function 'foo' that returns the product of argument $a0 and the return value from calling 'bar'. Assume function 'bar' takes no arguments and returns a 32-bit signed number in $v0. Return the low bits of the product in $v1 and the high bits in $v0.
+
+(Because we call another function, you need to store the return address of 'foo' on the stack and properly manage the stack. Remember that, by convention, a function does not guarantee preserving the values of the argument regisers.)
+
+A:
+==========

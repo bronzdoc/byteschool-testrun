@@ -7,15 +7,15 @@ li $4,0x00000005
 li $5,0x00000002
 li $6,0x00000000
 
-bgtz $6, opt1
-blez $6, opt2
-opt1:
-    add $3, $4, $5
-j afterall
-opt2:
-    sub $3, $4, $5
-afterall:
-    add $4, $4, $6
+    bgtz $6, opt1
+    blez $6, opt2
+    opt1:
+        add $3, $4, $5
+    j afterall
+    opt2:
+        sub $3, $4, $5
+    afterall:
+        add $4, $4, $6
 
 =============
 
@@ -23,10 +23,13 @@ Q: If $7 is less than or equal to zero, jump to address 0x7600FFFC, otherwise ju
 (Use blez and jr.)
 
 A:
+    blez &7, foo
+    li $3, 0x70000000
+    jr $3
+foo:
+    li $3, 0x7600FFFC
+    jr $3
 
-li $a0, 0x70000000
-blez $7, 0x7600FFFC
-jr $a0
 =============
 
 Q: Translate this Javascript code into an assembly equivalent.
