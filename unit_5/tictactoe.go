@@ -17,8 +17,6 @@ func main() {
 	// init the reader
 	stdin := bufio.NewReader(os.Stdin)
 
-	// TODO...
-
 	player_won := false
 	player := "o"
 	turns := 0
@@ -50,7 +48,14 @@ func main() {
 			fmt.Println(err)
 			return
 		}
-		board[index-1] = player
+
+		index -= 1
+		if board[index] == "x" || board[index] == "o" {
+			fmt.Println("Spot already taken, try a different number")
+			continue
+		} else {
+			board[index] = player
+		}
 
 		// The game need at least 3 moves to have a winner
 		if turns > 2 {
@@ -58,6 +63,11 @@ func main() {
 			winner := winner(&board)
 			if winner != "" {
 				fmt.Println("Winner: ", winner)
+				return
+			}
+
+			if turns > 7 {
+				fmt.Println("TIE!")
 				return
 			}
 		}
@@ -112,10 +122,6 @@ func xWon(board *[9]string) bool {
 // Check if "o" won
 func oWon(board *[9]string) bool {
 	return won(board, "o")
-}
-
-// Check if it's a tie
-func tie(board *[9]string) {
 }
 
 // Check if player won
