@@ -1,0 +1,5 @@
+rubber
+mittens
+goat
+dog
+cat
